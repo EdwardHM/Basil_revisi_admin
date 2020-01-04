@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="binary/assets/images/favicon.png">
+    <title>Matrix Template - The Ultimate Multipurpose admin template</title>
+    <!-- Custom CSS -->
+        <!--punya chart dashboard-->
+        <!--punya tabel-->
+    <link href="css/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card" >
+              <div class="card-body">
+                <h5 class="card-title">Basic Datatable</h5>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered" id="hasil" >
+                      <thead>
+                        <tr>
+                          <th>Nama</th>
+                          <th>Alamat</th>
+                          <th>Login</th>
+                          <th>Status</th>
+                          <!-- <th>Edit</th> -->
+                        </tr>
+                      </thead>
+            
+                      <tfoot>
+                            <tr>
+                              <th>Nama</th>
+                              <th>Alamat</th>
+                              <th>Login</th>
+                              <th>Status</th>
+                              <!-- <th>Edit</th> -->
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="jquery/jquery.min.js"></script>
+<script src="js/datatables.min.js"></script>
+<script src="js/daftar_presensi.js"></script>
+<script>
+        /****************************************
+         *       Basic Table                   *
+         ****************************************/
+        $('#zero_config').DataTable();
+</script>
+</body>
+
+</html>
