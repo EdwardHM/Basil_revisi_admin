@@ -23,7 +23,7 @@ function displayAll(){
                 var hasil = result["records"][i];
                 var t = $('#hasil').DataTable();
                 if(hasil["status"] == "Belum Tervalidasi"){
-                    var button = "<button type='button' id='askbutton' class='btn btn-block btn-primary' onclick='validasi()'>Approve</button>";
+                    var button = "<button type='button' id='askbutton' class='btn btn-block btn-info' onclick='validasi()'>Approve</button>";
                 }else{
                     var button = "<button type='button' id='askbutton' class='btn btn-block btn-danger' onclick='validasi()'>Not Approve</button>";
                 }
@@ -32,6 +32,7 @@ function displayAll(){
                         hasil["Nama"],
                         hasil["lokasi"],
                         hasil["created_at"],
+                        hasil["keterangan"],
                         hasil["status"],
                         button
                     ])
@@ -50,7 +51,7 @@ function validasi(){
     var table = $('#hasil').DataTable();
  
     $('#hasil').on('click', 'tr', function () {
-        var status = table.row( this ).data()[3];
+        var status = table.row( this ).data()[4];
         var nama = table.row( this ).data()[0];
         var waktu = table.row( this ).data()[2];
         console.log(status, nama, waktu);
@@ -68,13 +69,13 @@ function validasi(){
             {
                 var error = result.error;
                 if(error){
-                    console.log("gagal validasi");
+                    console.log("Gagal Memperbarui Status");
                     console.log(result.error_msg);
                     alert(result.error_msg);
                 }
                 else{
                     console.log("Berhasil validasi");
-                    alert("sini");
+                    alert("Berhasil Memperbarui Status");
                     window.location.href = "tables.html";
                 }
             }
@@ -82,3 +83,105 @@ function validasi(){
         return false;
     });
 }
+
+
+// function popUp(){
+    // js untuk bagian popup
+    var popUp = document.getElementById("popUpBox");
+    var button = document.getElementById("cetak");
+    var close = document.getElementById("close");
+
+    button.onclick = function(){
+        popUp.style.display ="block";
+    }
+
+    close.onclick = function(){
+        popUp.style.display = "none";
+    }
+
+    window.onclick = function(){
+        if(event.target == this.popUp){
+            popUp.style.display = "none";
+        }
+    }
+    // end js untuk bagian popup
+// }
+
+
+// fungsi untuk bagian kolom form popup
+document.getElementById("namaCetak").style.visibility="hidden";
+//fungsi radiobutton
+function visible(){
+    var jCetak = document.querySelector('input[name="jenisCetak"]:checked').value;
+    var kolomNama = document.getElementById("namaCetak");
+    if(jCetak == "semua"){
+        kolomNama.style.visibility = "hidden";
+    } else if(jCetak == "sesuaiNama"){
+        kolomNama.style.visibility = "visible"
+    }
+}
+
+
+function downloadPDF(){
+    var jCetak = document.querySelector('input[name="jenisCetak"]:checked').value;
+    var kolomNama = document.getElementById("namaCetak");
+    var siapa = "admin";
+    if(jCetak == "semua"){
+        console.log("semua");
+        // kirim ke API semua masuk ke pdf
+        $.ajax({
+            url: "http://192.168.1.6/MembuatPdf/index.php",
+            type: "POST",
+            datatype:"json",
+            crossDomain: true,
+            data:JSON.stringify( { jabatan:siapa, cari:null, user_id:null } ),
+            cache:false,
+            processData:false,
+
+            success: function(result)
+            {
+                var error = result.error;
+                if(error){
+                    console.log("gagal");
+                    console.log(result.error_msg);
+                    alert(result.error_msg);
+                }
+                else{
+                    console.log("terdownload");
+                    window.location.href = "http://192.168.1.6/MembuatPdf/FPDF/DaftarSemua.pdf"; 
+                }
+            }
+        });
+        return false;
+
+    } else if(jCetak == "sesuaiNama"){
+        // kirim sesuai input nama
+        var nama = kolomNama.value;
+        console.log(nama);
+        $.ajax({
+            url: "http://192.168.1.6/MembuatPdf/index.php",
+            type: "POST",
+            datatype:"json",
+            crossDomain: true,
+            data:JSON.stringify( { jabatan:siapa, cari:nama, user_id:null } ),
+            cache:false,
+            processData:false,
+
+            success: function(result)
+            {
+                var error = result.error;
+                if(error){
+                    console.log("gagal");
+                    console.log(result.error_msg);
+                    alert(result.error_msg);
+                }
+                else{
+                    console.log("terdownload");
+                    window.location.href = "http://192.168.1.6/MembuatPdf/FPDF/"+nama+".pdf"; 
+                }
+            }
+        });
+        return false;
+    }
+}
+
