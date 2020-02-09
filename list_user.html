@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Admin Basil</title>
     <!-- Custom CSS -->
-        <!--punya chart dashboard-->
         <!--punya tabel-->
     <link href="css/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -25,8 +24,8 @@
 
   <div class="sidenav">
     <img src="image/LOGO-BASIL.png" id="logo">
-    <a href="tables.html" class="active">List Presensi</a>
-    <a href="list_user.html">List User</a>
+    <a href="tables.html">List Presensi</a>
+    <a href="list_user.html" class="active">List User</a>
     <i class="fa fa-sign-out" id="out" onclick="LogOut()"></i>
   </div>
 
@@ -39,33 +38,24 @@
           <div class="col-12">
               <div class="card" >
                 <div class="card-body">
-                  <h5 class="card-title">List Presensi</h5>
-                    <button type="button" class="btn btn-info" style=" margin-bottom: 20px;" id="cetak">
-                      <i class="fa fa-file-pdf-o" style="font-size:25px;"></i> Lihat Sebagai PDF
-                    </button>
+                  <h5 class="card-title">List User</h5>
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered" id="hasil" >
+                        <table class="table table-striped table-bordered" id="hasil2" >
                           <thead>
                             <tr>
                               <th>Nama</th>
-                              <th>Lokasi</th>
-                              <th>Jam Presensi</th>
-                              <th>Keterangan</th>
-                              <th>Status</th>
-                              <th>Foto</th>
-                              <th>Edit</th>
+                              <th>No. Telpon</th>
+                              <!-- <th>Jabatan</th>
+                              <th>Keterangan</th> -->
                             </tr>
                           </thead>
                 
                           <tfoot>
                                 <tr>
-                                  <th>Nama</th>
-                                  <th>Lokasi</th>
-                                  <th>Jam Presensi</th>
-                                  <th>Keterangan</th>
-                                  <th>Status</th>
-                                  <th>Foto</th>
-                                  <th>Edit</th>
+                                    <th>Nama</th>
+                                    <th>No. Telpon</th>
+                                    <!-- <th>Jabatan</th>
+                                    <th>Keterangan</th> -->
                                 </tr>
                             </tfoot>
                         </table>

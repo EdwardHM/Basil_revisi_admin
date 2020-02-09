@@ -1,5 +1,6 @@
 $(document).ready(function(){ 
 displayAll()
+displayUser()
 });
 
 function displayAll(){
@@ -27,22 +28,22 @@ function displayAll(){
                 }else{
                     var button = "<button type='button' id='askbutton' class='btn btn-block btn-danger' onclick='validasi()'>Not Approve</button>";
                 }
-                
+                var link = "http://192.168.1.6/API_Basil_Revisi/"+hasil["foto"];
+                var link_foto = " <a href= '"+link+"'><p>Cek Foto</p></a> "
                     t.row.add( [
                         hasil["Nama"],
                         hasil["lokasi"],
                         hasil["created_at"],
                         hasil["keterangan"],
                         hasil["status"],
+                        link_foto,
                         button
                     ])
              } 
              t.order( [[ 2, 'desc' ]] ).draw( false );
            } else {
                 document.getElementById('hasil').innerHTML = "Anda belum memiliki history presensi"; 
-           }
-           
-            
+           } 
         }         
     });
 }
@@ -122,6 +123,8 @@ function visible(){
 }
 
 
+
+// Membuat PDF
 function downloadPDF(){
     var jCetak = document.querySelector('input[name="jenisCetak"]:checked').value;
     var kolomNama = document.getElementById("namaCetak");
@@ -184,4 +187,49 @@ function downloadPDF(){
         return false;
     }
 }
+//End Membuat PDF
 
+
+function displayUser(){
+    console.log("display all");
+    $.ajax({
+        url         : "http://192.168.1.6/API_Basil_Revisi/user.php",
+        type        : "GET",
+        dataType    : "json",
+        crossDomain: true,
+        cache:false,
+        processData:false,
+        success     : function(result){
+            console.log(result);
+            
+            //menghitung jumlah data history
+           const jmlData = result["num"];
+           console.log(jmlData);
+
+           if(jmlData > 0){
+            for(var i = 0; i < jmlData; i++){
+                var hasil = result["records"][i];
+                var t = $('#hasil2').DataTable();
+
+                    t.row.add( [
+                        hasil["nama"],
+                        hasil["phone"],
+                        // "a test",
+                        // "a test 2"
+                    ])
+             } 
+             t.order( [[ 0, 'asc' ]] ).draw( false );
+           } else {
+                document.getElementById('hasil').innerHTML = "Anda belum memiliki history presensi"; 
+           }
+           
+            
+        }         
+    });
+}
+
+
+function LogOut(){
+    sessionStorage.clear();
+    window.location.href = "login.html";
+}
