@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Admin Basil</title>
     <!-- Custom CSS -->
+        <!--punya chart dashboard-->
         <!--punya tabel-->
     <link href="css/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -26,6 +27,7 @@
     <img src="image/LOGO-BASIL.png" id="logo">
     <a href="tables.html">List Presensi</a>
     <a href="list_user.html" class="active">List User</a>
+    <a href="#" id="ganti2">Ganti Password</a>
     <i class="fa fa-sign-out" id="out" onclick="LogOut()"></i>
   </div>
 
@@ -63,24 +65,25 @@
               </div>
           </div>
       </div>
-  
-      <!-- popup form cetak pdf -->
-      <div id="popUpBox" class="popUpBox">
-        <div id="popUpContent" class="popUpContent">
+
+      <div id="popUpBox3" class="popUpBox">
+        <div id="popUpContent3" class="popUpContent">
           <div class="popUpHeader">
-            <span class="close" id="close">×</span>
-            <p>Cetak Sebagai PDF</p>
+            <span class="close" id="close3">×</span>
+            <p class="judulPop">Ganti Password</p>
           </div>
           <br class="popUpMain">
-            <input type="radio" name="jenisCetak" id="jenisCetak" value="semua" checked onclick="visible()">Cetak Semua
-            <input type="radio" name="jenisCetak" id="jeniscetak" value="sesuaiNama" onclick="visible()"> Cetak Berdasarkan Nama </br>
-            <input type="text" name="namaCetak" id="namaCetak"> </br>
-            <button class="btn btn-info" id="download" class="download" onclick="downloadPDF()">
-              <i class="fa fa-download" style="font-size:25px"></i> Download PDF
+            <label class="labelPop" >Password Baru</label>
+            <input type="password" name="passwordBaru" id="passwordBaru"> </br>
+            <label class="labelPop" >Konfirmasi Password Baru</label>
+            <input type="password" name="passwordBaru2" id="passwordBaru2"> </br>
+            <button class="btn btn-info" id="save" class="save" onclick="changePass()">
+              <i class="fa fa-save" style="font-size:25px"></i> Save Password
             </button>
           </div>
         </div>
-      </div>
+      </div>  
+          <!-- end pop up  -->
     </div>
 </div>
 

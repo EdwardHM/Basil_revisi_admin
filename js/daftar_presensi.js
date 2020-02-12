@@ -105,6 +105,45 @@ function validasi(){
             popUp.style.display = "none";
         }
     }
+
+// popup 2 password
+    var popUp2 = document.getElementById("popUpBox2");
+    var button2 = document.getElementById("ganti");
+    var close2 = document.getElementById("close2");
+
+    button2.onclick = function(){
+        popUp2.style.display ="block";
+    }
+
+    close2.onclick = function(){
+        popUp2.style.display = "none";
+    }
+
+    window.onclick = function(){
+        if(event.target == this.popUp2){
+            popUp2.style.display = "none";
+        }
+    }
+
+    // popup 3 password
+    var popUp3 = document.getElementById("popUpBox3");
+    var button3 = document.getElementById("ganti2");
+    var close3 = document.getElementById("close3");
+
+    button3.onclick = function(){
+        popUp3.style.display ="block";
+    }
+
+    close3.onclick = function(){
+        popUp3.style.display = "none";
+    }
+
+    window.onclick = function(){
+        if(event.target == this.popUp3){
+            popUp3.style.display = "none";
+        }
+    }
+
     // end js untuk bagian popup
 // }
 
@@ -228,7 +267,45 @@ function displayUser(){
     });
 }
 
+// Update Password
+function changePass(){
+    var passBaru1 = document.getElementById("passwordBaru").value;
+    var passBaru2 = document.getElementById("passwordBaru2").value;
+    var user =     sessionStorage.getItem('user_uuid');
+    console.log(passBaru2);
+    if(passBaru1 != passBaru2){
+        alert("Gagal Memperbarui Password!");
+    }
+    else{
+        $.ajax({
+            url: "http://192.168.1.6/API_Basil_Revisi/update_user.php",
+            type: "POST",
+            datatype:"json",
+            crossDomain: true,
+            data:JSON.stringify( { pass_Baru:passBaru2, user_id:user } ),
+            cache:false,
+            processData:false,
 
+            success: function(result)
+            {
+                var error = result.error;
+                if(error){
+                    console.log("gagal");
+                    console.log(result.error_msg);
+                    alert(result.error_msg);
+                }
+                else{
+                    alert("Berhasil Memperbarui Password!");
+                }
+            }
+        });
+        return false;
+    }
+}
+
+
+
+// logout
 function LogOut(){
     sessionStorage.clear();
     window.location.href = "login.html";

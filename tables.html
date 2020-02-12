@@ -27,6 +27,7 @@
     <img src="image/LOGO-BASIL.png" id="logo">
     <a href="tables.html" class="active">List Presensi</a>
     <a href="list_user.html">List User</a>
+    <a href="#" id="ganti">Ganti Password</a>
     <i class="fa fa-sign-out" id="out" onclick="LogOut()"></i>
   </div>
 
@@ -79,7 +80,7 @@
         <div id="popUpContent" class="popUpContent">
           <div class="popUpHeader">
             <span class="close" id="close">×</span>
-            <p>Cetak Sebagai PDF</p>
+            <p class="judulPop">Cetak Sebagai PDF</p>
           </div>
           <br class="popUpMain">
             <input type="radio" name="jenisCetak" id="jenisCetak" value="semua" checked onclick="visible()">Cetak Semua
@@ -91,6 +92,28 @@
           </div>
         </div>
       </div>
+       <!-- End popup form cetak pdf -->
+
+
+             <!-- popup form ganti pass -->
+      <div id="popUpBox2" class="popUpBox">
+        <div id="popUpContent2" class="popUpContent">
+          <div class="popUpHeader">
+            <span class="close" id="close2">×</span>
+            <p class="judulPop">Ganti Password</p>
+          </div>
+          <br class="popUpMain">
+            <label class="labelPop" >Password Baru</label>
+            <input type="password" name="passwordBaru" id="passwordBaru"> </br>
+            <label class="labelPop" >Konfirmasi Password Baru</label>
+            <input type="password" name="passwordBaru2" id="passwordBaru2"> </br>
+            <button class="btn btn-info" id="save" class="save" onclick="changePass()">
+              <i class="fa fa-save" style="font-size:25px"></i> Save Password
+            </button>
+          </div>
+        </div>
+      </div>
+       <!-- End popup form form ganti pass  -->
     </div>
 </div>
 
