@@ -1,6 +1,8 @@
 $(document).ready(function(){ 
-displayAll()
-displayUser()
+    displayAll()
+    displayUser()
+    // fungsi untuk bagian kolom form popup
+    document.getElementById("namaCetak").style.visibility="hidden";
 });
 
 function displayAll(){
@@ -28,19 +30,35 @@ function displayAll(){
                 }else{
                     var button = "<button type='button' id='askbutton' class='btn btn-block btn-danger' onclick='validasi()'>Not Approve</button>";
                 }
+
+                if(hasil["keterangan"] == "izin"){
+                    var keterangan = hasil["keterangan"].fontcolor( "red" );
+                } else if (hasil["keterangan"] == "dinas"){
+                    var keterangan = hasil["keterangan"].fontcolor( "lime" );
+                } else if (hasil["keterangan"] == "presensi"){
+                    var keterangan = hasil["keterangan"].fontcolor( "blue" );
+                } 
+
                 var link = "http://192.168.1.6/API_Basil_Revisi/"+hasil["foto"];
-                var link_foto = " <a href= '"+link+"'><p>Cek Foto</p></a> "
+                var link_foto = " <a href= '"+link+"'><i class='fa fa-image' style='font-size:24px'></i></a> "
+                var tgl_db=hasil["created_at"];
+                var date_arr = tgl_db.split(" ");
+                var date_aar2 = date_arr[0].split("-");
+                var new_date = date_aar2[2] + "-" + date_aar2[1] + "-" + date_aar2[0] + " " + date_arr[1];
                     t.row.add( [
                         hasil["Nama"],
                         hasil["lokasi"],
                         hasil["created_at"],
-                        hasil["keterangan"],
+                        keterangan,
                         hasil["status"],
                         link_foto,
-                        button
+                        button,
+                        new_date
                     ])
              } 
-             t.order( [[ 2, 'desc' ]] ).draw( false );
+            //  t.row( $(this) ).draw();
+            t.column( 7 ).visible( false );
+             t.order( [[ 7, 'desc' ]] ).draw( false );
            } else {
                 document.getElementById('hasil').innerHTML = "Anda belum memiliki history presensi"; 
            } 
@@ -54,7 +72,7 @@ function validasi(){
     $('#hasil').on('click', 'tr', function () {
         var status = table.row( this ).data()[4];
         var nama = table.row( this ).data()[0];
-        var waktu = table.row( this ).data()[2];
+        var waktu = table.row( this ).data()[7];
         console.log(status, nama, waktu);
 
         $.ajax({
@@ -127,7 +145,7 @@ function validasi(){
 
     // popup 3 password
     var popUp3 = document.getElementById("popUpBox3");
-    var button3 = document.getElementById("ganti2");
+    var button3 = document.getElementById("chart");
     var close3 = document.getElementById("close3");
 
     button3.onclick = function(){
@@ -148,8 +166,7 @@ function validasi(){
 // }
 
 
-// fungsi untuk bagian kolom form popup
-document.getElementById("namaCetak").style.visibility="hidden";
+
 //fungsi radiobutton
 function visible(){
     var jCetak = document.querySelector('input[name="jenisCetak"]:checked').value;
