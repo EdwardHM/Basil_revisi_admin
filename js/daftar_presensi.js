@@ -3,12 +3,40 @@ $(document).ready(function(){
     displayUser()
     // fungsi untuk bagian kolom form popup
     document.getElementById("namaCetak").style.visibility="hidden";
+
+    var select = document.getElementById('select-year');
+    var date = new Date();
+    var year = date.getFullYear();
+    for (var i = year - 4; i <= year + 3; i++) {
+        var option = document.createElement('option');
+        option.value = option.innerHTML = i;
+        if (i === year) option.setAttribute('selected',true);
+        select.appendChild(option);
+    }
+    select.innerHTML += option
+
+
+    var select = document.getElementById('cetak-kapan');
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth()+1;
+    var bulan_tahun = month+"-"+year;
+    for (var i = year - 4; i <= year + 3; i++) {
+        for(var count = 0; count < 12; count++){
+            var option = document.createElement('option');
+            option.value = option.innerHTML = count+1+"-"+i;
+            if(count+1+"-"+i == bulan_tahun) option.setAttribute('selected',true);
+            select.appendChild(option);
+        }
+
+    }
+    select.innerHTML += option
 });
 
 function displayAll(){
     console.log("display all");
     $.ajax({
-        url         : "http://192.168.1.6/API_Basil_Revisi/history.php",
+        url         : "http://192.168.5.53/API_Basil_Revisi/history.php",
         type        : "GET",
         dataType    : "json",
         crossDomain: true,
@@ -39,7 +67,7 @@ function displayAll(){
                     var keterangan = hasil["keterangan"].fontcolor( "blue" );
                 } 
 
-                var link = "http://192.168.1.6/API_Basil_Revisi/"+hasil["foto"];
+                var link = "http://192.168.5.53/API_Basil_Revisi/"+hasil["foto"];
                 var link_foto = " <a href= '"+link+"'><i class='fa fa-image' style='font-size:24px'></i></a> "
                 var tgl_db=hasil["created_at"];
                 var date_arr = tgl_db.split(" ");
@@ -76,7 +104,7 @@ function validasi(){
         console.log(status, nama, waktu);
 
         $.ajax({
-            url: "http://192.168.1.6/API_Basil_Revisi/validasi.php",
+            url: "http://192.168.5.53/API_Basil_Revisi/validasi.php",
             type: "POST",
             datatype:"json",
             crossDomain: true,
@@ -185,15 +213,19 @@ function downloadPDF(){
     var jCetak = document.querySelector('input[name="jenisCetak"]:checked').value;
     var kolomNama = document.getElementById("namaCetak");
     var siapa = "admin";
+    var kapan = document.getElementById("cetak-kapan").value;
+    var bulan_cetak = kapan.substring(0,1);
+    var tahun_cetak = kapan.substring(2,6);
+    console.log(bulan_cetak , tahun_cetak);
     if(jCetak == "semua"){
         console.log("semua");
         // kirim ke API semua masuk ke pdf
         $.ajax({
-            url: "http://192.168.1.6/MembuatPdf/index.php",
+            url: "http://192.168.5.53/MembuatPdf/index.php",
             type: "POST",
             datatype:"json",
             crossDomain: true,
-            data:JSON.stringify( { jabatan:siapa, cari:null, user_id:null } ),
+            data:JSON.stringify( { jabatan:siapa, cari:null, user_id:null, bln:bulan_cetak, thn:tahun_cetak } ),
             cache:false,
             processData:false,
 
@@ -207,7 +239,7 @@ function downloadPDF(){
                 }
                 else{
                     console.log("terdownload");
-                    window.location.href = "http://192.168.1.6/MembuatPdf/FPDF/DaftarSemua.pdf"; 
+                    window.location.href = "http://192.168.5.53/MembuatPdf/FPDF/DaftarSemua.pdf"; 
                 }
             }
         });
@@ -218,11 +250,11 @@ function downloadPDF(){
         var nama = kolomNama.value;
         console.log(nama);
         $.ajax({
-            url: "http://192.168.1.6/MembuatPdf/index.php",
+            url: "http://192.168.5.53/MembuatPdf/index.php",
             type: "POST",
             datatype:"json",
             crossDomain: true,
-            data:JSON.stringify( { jabatan:siapa, cari:nama, user_id:null } ),
+            data:JSON.stringify( { jabatan:siapa, cari:nama, user_id:null, bln:bulan_cetak, thn:tahun_cetak  } ),
             cache:false,
             processData:false,
 
@@ -236,7 +268,7 @@ function downloadPDF(){
                 }
                 else{
                     console.log("terdownload");
-                    window.location.href = "http://192.168.1.6/MembuatPdf/FPDF/"+nama+".pdf"; 
+                    window.location.href = "http://192.168.5.53/MembuatPdf/FPDF/"+nama+".pdf"; 
                 }
             }
         });
@@ -249,7 +281,7 @@ function downloadPDF(){
 function displayUser(){
     console.log("display all");
     $.ajax({
-        url         : "http://192.168.1.6/API_Basil_Revisi/user.php",
+        url         : "http://192.168.5.53/API_Basil_Revisi/user.php",
         type        : "GET",
         dataType    : "json",
         crossDomain: true,
@@ -295,7 +327,7 @@ function changePass(){
     }
     else{
         $.ajax({
-            url: "http://192.168.1.6/API_Basil_Revisi/update_user.php",
+            url: "http://192.168.5.53/API_Basil_Revisi/update_user.php",
             type: "POST",
             datatype:"json",
             crossDomain: true,

@@ -1,5 +1,10 @@
 $(document).ready(function(){
     chartData();
+
+    $("#select-year").click(function(){
+        chartData()
+    });
+    
 });
 
 
@@ -7,7 +12,7 @@ $(document).ready(function(){
     function chartData(){
         console.log("chart ready");
         $.ajax({
-            url         : "http://192.168.1.6/API_Basil_Revisi/for_chart.php",
+            url         : "http://192.168.5.53/API_Basil_Revisi/for_chart.php",
             type        : "GET",
             dataType    : "json",
             crossDomain: true,
@@ -19,65 +24,67 @@ $(document).ready(function(){
                 console.log(result['total_keterangan']);
                 var d = new Date();
                 var n = d.getFullYear();
+                var sel_year= document.getElementById("select-year").value
                 var hasil = result['total_keterangan'];
+                sessionStorage.setItem("total_keterangan",hasil)
                 
                 for (var x = 0; x < hasil.length; x++){
-                    if(hasil[x]['when'] == "01-"+n){
+                    if(hasil[x]['when'] == "01-"+sel_year){
                         var jan_pres = hasil[x]['jumlah_presensi'];
                         var jan_din = hasil[x]['jumlah_dinas'];
                         var jan_iz = hasil[x]['jumlah_izin'];
                     }
-                    else if(hasil[x]['when'] == "02-"+n){
+                    else if(hasil[x]['when'] == "02-"+sel_year){
                         var feb_pres = hasil[x]['jumlah_presensi'];
                         var feb_din = hasil[x]['jumlah_dinas'];
                         var feb_iz = hasil[x]['jumlah_izin'];
                     }
-                    else if(hasil[x]['when'] == "03-"+n){
+                    else if(hasil[x]['when'] == "03-"+sel_year){
                         var mar_pres = hasil[x]['jumlah_presensi'];
                         var mar_din = hasil[x]['jumlah_dinas'];
                         var mar_iz = hasil[x]['jumlah_izin'];
                     }
-                    else if(hasil[x]['when'] == "04-"+n){
+                    else if(hasil[x]['when'] == "04-"+sel_year){
                         var apr_pres = hasil[x]['jumlah_presensi'];
                         var apr_din = hasil[x]['jumlah_dinas'];
                         var apr_iz = hasil[x]['jumlah_izin'];
                     }
-                    else if(hasil[x]['when'] == "05-"+n){
+                    else if(hasil[x]['when'] == "05-"+sel_year){
                         var mei_pres = hasil[x]['jumlah_presensi'];
                         var mei_din = hasil[x]['jumlah_dinas'];
                         var mei_iz = hasil[x]['jumlah_izin'];
                     }
-                    else if(hasil[x]['when'] == "06-"+n){
+                    else if(hasil[x]['when'] == "06-"+sel_year){
                         var jun_pres = hasil[x]['jumlah_presensi'];
                         var jun_din = hasil[x]['jumlah_dinas'];
                         var jun_iz = hasil[x]['jumlah_izin'];
                     }
-                    else if(hasil[x]['when'] == "07-"+n){
+                    else if(hasil[x]['when'] == "07-"+sel_year){
                         var jul_pres = hasil[x]['jumlah_presensi'];
                         var jul_din = hasil[x]['jumlah_dinas'];
                         var jul_iz = hasil[x]['jumlah_izin'];
                     }
-                    else if(hasil[x]['when'] == "08-"+n){
+                    else if(hasil[x]['when'] == "08-"+sel_year){
                         var aug_pres = hasil[x]['jumlah_presensi'];
                         var aug_din = hasil[x]['jumlah_dinas'];
                         var aug_iz = hasil[x]['jumlah_izin'];
                     }
-                    else if(hasil[x]['when'] == "09-"+n){
+                    else if(hasil[x]['when'] == "09-"+sel_year){
                         var sep_pres = hasil[x]['jumlah_presensi'];
                         var sep_din = hasil[x]['jumlah_dinas'];
                         var sep_iz = hasil[x]['jumlah_izin'];
                     }
-                    else if(hasil[x]['when'] == "10-"+n){
+                    else if(hasil[x]['when'] == "10-"+sel_year){
                         var okt_pres = hasil[x]['jumlah_presensi'];
                         var okt_din = hasil[x]['jumlah_dinas'];
                         var okt_iz = hasil[x]['jumlah_izin'];
                     }
-                    else if(hasil[x]['when'] == "11-"+n){
+                    else if(hasil[x]['when'] == "11-"+sel_year){
                         var nov_pres = hasil[x]['jumlah_presensi'];
                         var nov_din = hasil[x]['jumlah_dinas'];
                         var nov_iz = hasil[x]['jumlah_izin'];
                     }
-                    else if(hasil[x]['when'] == "12-"+n){
+                    else if(hasil[x]['when'] == "12-"+sel_year){
                         var des_pres = hasil[x]['jumlah_presensi'];
                         var des_din = hasil[x]['jumlah_dinas'];
                         var des_iz = hasil[x]['jumlah_izin'];

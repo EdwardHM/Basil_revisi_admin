@@ -7,7 +7,7 @@ $(document).ready(function(){
         console.log(password);
         event.preventDefault();
         $.ajax({
-            url: "http://192.168.1.6/API_Basil_Revisi/login.php",
+            url: "http://192.168.5.53/API_Basil_Revisi/login.php",
             type: "POST",
             datatype:"json",
             crossDomain: true,

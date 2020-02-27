@@ -93,6 +93,7 @@
           <br class="popUpMain">
             <input type="radio" name="jenisCetak" id="jenisCetak" value="semua" checked onclick="visible()">Cetak Semua
             <input type="radio" name="jenisCetak" id="jeniscetak" value="sesuaiNama" onclick="visible()"> Cetak Berdasarkan Nama </br>
+            <select id="cetak-kapan"> </select>
             <input type="text" name="namaCetak" id="namaCetak"> </br>
             <button class="btn btn-info" id="download" class="download" onclick="downloadPDF()">
               <i class="fa fa-download" style="font-size:25px"></i> Download PDF
@@ -123,18 +124,20 @@
       </div>
        <!-- End popup form form ganti pass  -->
 
+       <!-- popup chart -->
        <div id="popUpBox3" class="popUpBox">
         <div id="popUpContent3" class="popUpContent">
           <div class="popUpHeader">
             <span class="close" id="close3">×</span>
-            <p class="judulPop">Ganti Password</p>
+            <p class="judulPop">Chart</p>
           </div>
           <br class="popUpMain">
-          <canvas id="myChart"></canvas>
+            <select id="select-year"> </select>
+            <canvas id="myChart"></canvas>
           </div>
         </div>
       </div>  
-
+      <!-- end pop up chart -->
     </div>
 </div>
 
